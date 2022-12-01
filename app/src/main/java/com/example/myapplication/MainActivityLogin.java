@@ -1,5 +1,6 @@
-package com.example.myapplication.general;
+package com.example.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,25 +13,34 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.myapplication.PrBar.Comunicacion;
-import com.example.myapplication.R;
-import com.example.myapplication.registrar;
+import com.example.myapplication.general.MainActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity implements Comunicacion {
+public class MainActivityLogin extends AppCompatActivity implements Comunicacion {
 
     private ImageButton btn_ig;
     private Button btn_registrar;
     private ProgressBar prbar;
     private MaterialButton btnlogin;
+    EditText nombreusuario;
+    EditText pass;
     int mov;
     SensorManager sensorManager;
     Sensor sensor;
     SensorEventListener sensorEventListener;
+    FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +58,27 @@ public class MainActivity extends AppCompatActivity implements Comunicacion {
 
         setContentView(R.layout.activity_main);
 
+        mAuth = FirebaseAuth.getInstance();
+
+        nombreusuario = findViewById(R.id.nombreusuario);
+        pass = findViewById(R.id.pw);
+        btnlogin = findViewById(R.id.btnlogin);
+
+        btnlogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String nameUser = nombreusuario.getText().toString().trim();
+                String pw = pass.getText().toString().trim();
+
+                if(nameUser.isEmpty() && pw.isEmpty()){
+                    Toast.makeText(MainActivityLogin.this, "Ingresar datos", Toast.LENGTH_SHORT).show();
+                }else{
+                    loginUser(nameUser,pw);
+                }
+            }
+        });
+
+
 
         /*boton registrar*/
         btn_registrar = findViewById(R.id.btn_registrar);
@@ -55,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements Comunicacion {
         btn_registrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, registrar.class));
+                startActivity(new Intent(MainActivityLogin.this, registrar.class));
             }
         });
 
@@ -86,9 +117,9 @@ public class MainActivity extends AppCompatActivity implements Comunicacion {
                 float x=sensorEvent.values[0];
                 if(x<-5 && mov==0){
                     mov++;
-                    Toast.makeText(MainActivity.this, "applicacion solo con sentido vertical ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivityLogin.this, "applicacion solo con sentido vertical ", Toast.LENGTH_SHORT).show();
                 }else if(x>5 && mov==1){
-                    Toast.makeText(MainActivity.this, "applicacion solo con sentido vertical", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivityLogin.this, "applicacion solo con sentido vertical", Toast.LENGTH_SHORT).show();
                     mov++;
                 }
                 if(mov==2){
@@ -106,6 +137,25 @@ public class MainActivity extends AppCompatActivity implements Comunicacion {
 
 
     }
+
+    private void loginUser(String nameUser, String pw) {
+        mAuth.signInWithEmailAndPassword(nameUser, pw).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    finish();
+                    startActivity(new Intent(MainActivityLogin.this, registrar.class));
+                    Toast.makeText(MainActivityLogin.this, "Sesion iniciada", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(MainActivityLogin.this, "Error al logear", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void start(){
         sensorManager.registerListener(sensorEventListener,sensor,SensorManager.SENSOR_DELAY_NORMAL);
     }

@@ -21,6 +21,12 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+            android:name=".general.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".registrar"
+            android:exported="false" />
+        <activity
             android:name=".galeriaadidas.Ozeego"
             android:exported="false" />
         <activity
@@ -75,7 +81,7 @@
             android:name=".modelos.perfiljordan4jbalvin"
             android:exported="false" />
         <activity
-            android:name=".PrBar.register"
+            android:name=".general.register"
             android:exported="false" />
         <activity
             android:name=".modelos.perfil41"
@@ -84,7 +90,7 @@
             android:name=".modelos.Galeriazapas"
             android:exported="false" />
         <activity
-            android:name=".general.MainActivity"
+            android:name=".MainActivityLogin"
             android:exported="true"
             android:theme="@style/SplashUp">
             <intent-filter>
