@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.myapplication">
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-feature
+        android:name="android.hardware.sensor.accelerometer"
+        android:required="true" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/logo3app"
+        android:label="Zapatillas ZO"
+        android:roundIcon="@drawable/logo3app"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyApplication"
+        tools:targetApi="31">
+        <activity
+            android:name=".galeriaadidas.Ozeego"
+            android:exported="false" />
+        <activity
+            android:name=".galeriaadidas.Ozelia"
+            android:exported="false" />
+        <activity
+            android:name=".galeriaadidas.Yeezy350"
+            android:exported="false" />
+        <activity
+            android:name=".galeriaadidas.Yeezysetesientos"
+            android:exported="false" />
+        <activity
+            android:name=".galeriaadidas.ExhibitLow"
+            android:exported="false" />
+        <activity
+            android:name=".galeriaNike.AirMax97"
+            android:exported="false" />
+        <activity
+            android:name=".galeriaNike.VaporMax"
+            android:exported="false" />
+        <activity
+            android:name=".galeriaNike.DunkPanda"
+            android:exported="false" />
+        <activity
+            android:name=".galeriaNike.AirForce3white"
+            android:exported="false" />
+        <activity
+            android:name=".galeriaNike.AirForceOFF"
+            android:exported="false" />
+        <activity
+            android:name=".gyroscope"
+            android:exported="false" />
+        <activity
+            android:name=".general.mapa"
+            android:exported="false" />
+        <activity
+            android:name=".galeriaNike.galeriaNike"
+            android:exported="false" />
+        <activity
+            android:name=".galeriaadidas.galeriaAdidas"
+            android:exported="false" />
+        <activity
+            android:name=".modelos.jordan4xoffwhite"
+            android:exported="false" />
+        <activity
+            android:name=".modelos.jordan1xdior"
+            android:exported="false" />
+        <activity
+            android:name=".modelos.jordan4military"
+            android:exported="false" />
+        <activity
+            android:name=".modelos.perfiljordan4jbalvin"
+            android:exported="false" />
+        <activity
+            android:name=".PrBar.register"
+            android:exported="false" />
+        <activity
+            android:name=".modelos.perfil41"
+            android:exported="false" />
+        <activity
+            android:name=".modelos.Galeriazapas"
+            android:exported="false" />
+        <activity
+            android:name=".general.MainActivity"
+            android:exported="true"
+            android:theme="@style/SplashUp">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
